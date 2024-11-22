@@ -1,4 +1,3 @@
-:- discontiguous main/0.
 
 % Remove the initialization directive and define main separately
 main :-

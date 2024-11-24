@@ -71,7 +71,10 @@ udzial_osoby(Osoba, DostosowanyUdzial) :-
                   - SumaPrzydzielona
                   - KosztBieglyNaOsobe
                   - KosztPrawnyNaOsobe
-                  + KosztOplacony.
+                  + KosztOplacony,
+    (DostosowanyUdzial < 0 -> 
+        format("Warning: Negative adjusted share for ~w (~w PLN)~n", [Osoba, DostosowanyUdzial]);
+        true).
 
 % Całkowita wartość spadku
 calkowita_wartosc_spadku(SumaSpadku) :-

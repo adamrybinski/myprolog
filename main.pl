@@ -44,14 +44,18 @@ koszty_prawne_suma(SumaKosztowPrawnych) :-
 
 koszt_prawny_na_osobe(KosztPrawnyNaOsobe) :-
     koszty_prawne_suma(SumaKosztowPrawnych),
-    KosztPrawnyNaOsobe is SumaKosztowPrawnych / 5.
+    KosztPrawnyNaOsobe is SumaKosztowPrawnych / 5,
+    KosztPrawnyNaOsobe >= 0 -> true ; format("Warning: Invalid legal cost per person: ~w~n", [KosztPrawnyNaOsobe]).
 
 % Obliczanie kosztów biegłego na osobę
 koszt_biegly_na_osobe(KosztNaOsobe) :-
     findall(Koszt/Beneficiaries, biegly(_, Koszt, Beneficiaries), ListaKosztow),
     findall(IndywidualnyKoszt, (
         member(Koszt/Beneficiaries, ListaKosztow),
-        IndywidualnyKoszt is Koszt / Beneficiaries
+        Beneficiaries > 0 -> 
+        IndywidualnyKoszt is Koszt / Beneficiaries ;
+        format("Warning: Zero beneficiaries for cost ~w~n", [Koszt]),
+        IndywidualnyKoszt is 0
     ), KosztyNaOsobe),
     sum_list(KosztyNaOsobe, KosztNaOsobe).
 

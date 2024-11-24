@@ -23,7 +23,7 @@ suma_przydzielonych_nieruchomosci(Osoba, SumaPrzydzielona) :-
     sum_list(PrzydzieloneKwoty, SumaPrzydzielona).
 
 % Początkowy udział spadkobiercy (1/5 wartości całkowitej)
-poczatkowy_udzial(_, Udzial) :-
+poczatkowy_udzial(Udzial) :-
     nieruchomosc(dzialki_jablonka, P1),
     nieruchomosc(dom_jablonka_polowa, P2),
     nieruchomosc(kasinka_mala_5_8, P3),
@@ -62,7 +62,7 @@ koszt_oplacony_przez(Osoba, SumaOplaconychKosztow) :-
 
 % Obliczanie dostosowanego udziału dla spadkobiercy
 udzial_osoby(Osoba, DostosowanyUdzial) :-
-    poczatkowy_udzial(Osoba, PoczatkowyUdzial),
+    poczatkowy_udzial(PoczatkowyUdzial),
     suma_przydzielonych_nieruchomosci(Osoba, SumaPrzydzielona),
     koszt_biegly_na_osobe(KosztBieglyNaOsobe),
     koszt_prawny_na_osobe(KosztPrawnyNaOsobe),
@@ -102,3 +102,6 @@ calkowita_wartosc_spadku(SumaSpadku) :-
    format("Udział Janusza: ~w PLN~n", [UdzialJanusza]),
 
    halt.
+% Define honorarium for the legal costs
+honorarium_mecenas(30000).
+koszty_sadowe(10000).

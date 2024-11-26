@@ -1,4 +1,6 @@
+% main.pl
 :- [customeriostate].
+:- [validation_rules].
 :- [dead_end_detection].
 
 % Automatically execute when file is loaded

@@ -42,7 +42,7 @@ transition(retry_delivery, customer_io_queue).
 % Complete process paths
 transition(log_success, process_complete).
 transition(trigger_followup, process_complete).
-transition(process_complete, user_visits).  % Optional: allows system to start new cycle
+transition(process_complete, user_visits).
 
 % Dead end detection
 dead_end(State) :-

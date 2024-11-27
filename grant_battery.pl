@@ -1,4 +1,14 @@
-:- discontiguous question/1.
+% Prompt the user with the first question on program start
+prompt_user :-
+    write('Would you like to proceed with the battery grant application? (yes/no) '),
+    read(Answer),
+    (   Answer == yes
+    ->  write('Proceeding with the application...'), nl
+    ;   write('Exiting program...'), nl, halt
+    ).
+
+% Call the prompt_user at the beginning
+:- prompt_user.
 
 :- discontiguous question/1.
 

@@ -5,7 +5,7 @@ partially_covered_by_grant :-
     write('Is the grant partially covered by the grant? (yes/no) '),
     read(Answer),
     assertz(grant_partially_covered(Answer)),
-    open('temp_facts.pl', write, Stream),
+    open('temp_facts.pl', append, Stream),
     write(Stream, 'grant_partially_covered('), write(Stream, Answer), write(Stream, ').\n'),
     close(Stream).
 question('payed monthly every month and how many years').

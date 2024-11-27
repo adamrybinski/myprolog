@@ -1,3 +1,3 @@
 question(partiallycoveredbythegrant).
 question(payedmonthlyeverymonth and how many years).
-question(you need battery that at least can light up 1 room and it's AC).
+question(you need a solar-powered battery that can at least light up 1 room and is compatible with AC).

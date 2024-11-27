@@ -11,12 +11,13 @@ detect_tracking_loop :-
     path_to_state(identified, track_event, Path1),
     path_to_state(track_event, identified, Path2),
     append(Path1, Path2, FullPath),
-    log_message(warning, 'Checking for tracking loop'),
+    log_message(warning, 
+        format(atom(Msg), 'Loop detected at state ~w with path ~w', [State, Path])),
     detect_loop(identified, FullPath).
 
 % Automatically execute when file is loaded
 :- initialization((
-    log_message(info, 'Starting dead end and loop detection'),
+    log_message(info, format(atom(Msg), 'Starting path tracking from ~w to ~w', [Start, End])),
     print_path_to_dead_end(user_activity),
     find_dead_ends(DeadEnds),
     log_message(info, format(atom(Msg), 'Dead ends found: ~w', [DeadEnds])),

@@ -22,7 +22,8 @@ path_to_state(Current, End, Visited, Path) :-
     format('[Transition] ~w -> ~w via ~w~n', [Current, Next, Event]),
     (Next = End -> 
         Path = [Next|Visited],
-        format('[Path] Found~n', [])
+        log_message(info, 
+            format(atom(Msg), 'Transition: ~w -> ~w via ~w', [Current, Next, Event]))
     ;
         path_to_state(Next, End, [Next|Visited], Path)
     ).

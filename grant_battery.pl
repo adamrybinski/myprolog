@@ -1,4 +1,10 @@
+:- discontiguous question/1.
+
+:- discontiguous question/1.
+
 question('partially covered by the grant').
+question('payed monthly every month and how many years').
+question('you need a solar-powered battery that can at least light up 1 room and is compatible with AC').
 
 % Rule for partially covered by the grant
 partially_covered_by_grant :-
@@ -8,7 +14,6 @@ partially_covered_by_grant :-
     open('temp_facts.pl', append, Stream),
     write(Stream, 'grant_partially_covered('), write(Stream, Answer), write(Stream, ').\n'),
     close(Stream).
-question('payed monthly every month and how many years').
 
 % Rule for payed monthly every month and how many years
 payed_monthly_every_month_and_how_many_years :-
@@ -18,7 +23,6 @@ payed_monthly_every_month_and_how_many_years :-
     open('temp_facts.pl', append, Stream),
     write(Stream, 'payment_monthly_for_5_years('), write(Stream, Answer), write(Stream, ').\n'),
     close(Stream).
-question('you need a solar-powered battery that can at least light up 1 room and is compatible with AC').
 
 % Rule for solar-powered battery requirements
 solar_powered_battery_requirements :-

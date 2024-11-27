@@ -5,42 +5,6 @@
 :- [detectloops].
 
 % Logging predicate
-log_message(Type, Message) :-
-    get_time(Timestamp),
-    format('[~w] ~w: ~w~n', [Timestamp, Type, Message]).
-
-% Enhanced loop detection with logging
-detect_loop(State, Path) :-
-    member(State, Path),
-    length(Path, Length),
-    Length > 1,
-    log_message(warning, 
-        format(atom(Msg), 'Loop detected at state ~w with path ~w', [State, Path])),
-    log_path(Path).
-
-% Log individual path steps
-log_path([]).
-log_path([State|Rest]) :-
-    log_message(info, format(atom(Msg), 'Path state: ~w', [State])),
-    log_path(Rest).
-
-% Enhanced path tracking with logging
-path_to_state(Start, End, Path) :-
-    log_message(info, format(atom(Msg), 'Starting path tracking from ~w to ~w', [Start, End])),
-    path_to_state(Start, End, [Start], Path).
-
-path_to_state(Current, End, Visited, Path) :-
-    transition(Current, Next, Event),
-    \+ member(Next, Visited),
-    log_message(info, 
-        format(atom(Msg), 'Transition: ~w -> ~w via ~w', [Current, Next, Event])),
-    (Next = End -> 
-        Path = [Next|Visited],
-        log_message(info, 'Path found'),
-        log_path(Path)
-    ;
-        path_to_state(Next, End, [Next|Visited], Path)
-    ).
 
 % Track specific loop between identified and track_event
 detect_tracking_loop :-

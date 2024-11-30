@@ -91,22 +91,22 @@ udzial_dostosowany(Osoba, UdzialDostosowany) :-
 % Main predicate
 main(_) :-
     calkowita_wartosc_spadku(CalkowitaWartosc),
-    format("Całkowita wartość spadku: ~:d PLN~n", [CalkowitaWartosc]),
+    format("Całkowita wartość spadku: ~w PLN~n", [CalkowitaWartosc]),
     
     udzial_dostosowany(adam, UdzialAdama),
-    format("Udział Adama: ~:d PLN~n", [UdzialAdama]),
+    format("Udział Adama: ~w PLN~n", [UdzialAdama]),
     
     udzial_dostosowany(paulina, UdzialPauliny),
-    format("Udział Pauliny: ~:d PLN~n", [UdzialPauliny]),
+    format("Udział Pauliny: ~w PLN~n", [UdzialPauliny]),
     
     udzial_dostosowany(wojtek, UdzialWojtka),
-    format("Udział Wojtka: ~:d PLN~n", [UdzialWojtka]),
+    format("Udział Wojtka: ~w PLN~n", [UdzialWojtka]),
     
     udzial_dostosowany(alicja, UdzialAlicji),
-    format("Udział Alicji: ~:d PLN~n", [UdzialAlicji]),
+    format("Udział Alicji: ~w PLN~n", [UdzialAlicji]),
     
     udzial_dostosowany(janusz, UdzialJanusza),
-    format("Udział Janusza: ~:d PLN~n", [UdzialJanusza]).
+    format("Udział Janusza: ~w PLN~n", [UdzialJanusza]).
 
 % Entry point
 :- initialization(main(_)).

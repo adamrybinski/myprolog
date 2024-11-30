@@ -37,7 +37,7 @@ koszty_sadowe(6000). % Tymczasowa wartość w PLN
 % Suma już przydzielonych nieruchomości dla osoby
 suma_darowizn(Osoba, SumaDarowiznOsoby) :-
     findall(Darowizna, darowizna(Osoba, _, Darowizna), WszystkieDarowizny),
-    sum_list(WszystkieDarowizny, SumaDarowiznOsoby).
+    foldl(plus, WszystkieDarowizny, 0, SumaDarowiznOsoby).
 
 % Całkowita wartość spadku
 calkowita_wartosc_spadku(CalkowitaWartosc) :-
@@ -73,7 +73,7 @@ koszt_prawny_na_osobe(KosztNaOsobe) :-
 % Suma kosztów pokrytych przez osobę
 suma_kosztow_pokrytych(Osoba, KosztyPokrytePrzezOsobe) :-
     findall(Kwota, koszt_pokryty(Osoba, _, Kwota), ListaPokrytych),
-    sum_list(ListaPokrytych, KosztyPokrytePrzezOsobe).
+    foldl(plus, ListaPokrytych, 0, KosztyPokrytePrzezOsobe).
 
 % Dostosowany udział spadkobiercy
 udzial_dostosowany(Osoba, UdzialDostosowany) :-
@@ -112,11 +112,6 @@ print_results :-
     udzial_dostosowany(janusz, UdzialJanusza),
     format("Udział Janusza: ~w PLN~n", [UdzialJanusza]).
 
-% Sum a list of numbers
-sum_list([], 0).
-sum_list([H|T], Sum) :-
-    sum_list(T, Rest),
-    Sum is H + Rest.
 
 % Entry point
 :- initialization(main(_)).

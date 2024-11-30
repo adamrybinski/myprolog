@@ -34,10 +34,16 @@ honorarium_pana_mecenasa(30000). % Tymczasowa wartość w PLN
 % Koszty sądowe
 koszty_sadowe(6000). % Tymczasowa wartość w PLN
 
+% Helper predicate to sum a list
+sum_list([], 0).
+sum_list([H|T], Sum) :-
+    sum_list(T, Rest),
+    Sum is H + Rest.
+
 % Suma już przydzielonych nieruchomości dla osoby
 suma_darowizn(Osoba, SumaDarowiznOsoby) :-
     findall(Darowizna, darowizna(Osoba, _, Darowizna), WszystkieDarowizny),
-    foldl(plus, WszystkieDarowizny, 0, SumaDarowiznOsoby).
+    sum_list(WszystkieDarowizny, SumaDarowiznOsoby).
 
 % Całkowita wartość spadku
 calkowita_wartosc_spadku(CalkowitaWartosc) :-
@@ -73,7 +79,7 @@ koszt_prawny_na_osobe(KosztNaOsobe) :-
 % Suma kosztów pokrytych przez osobę
 suma_kosztow_pokrytych(Osoba, KosztyPokrytePrzezOsobe) :-
     findall(Kwota, koszt_pokryty(Osoba, _, Kwota), ListaPokrytych),
-    foldl(plus, ListaPokrytych, 0, KosztyPokrytePrzezOsobe).
+    sum_list(ListaPokrytych, KosztyPokrytePrzezOsobe).
 
 % Dostosowany udział spadkobiercy
 udzial_dostosowany(Osoba, UdzialDostosowany) :-

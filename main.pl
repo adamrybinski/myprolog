@@ -90,6 +90,10 @@ udzial_dostosowany(Osoba, UdzialDostosowany) :-
 
 % Main predicate
 main(_) :-
+    print_results,
+    halt.
+
+print_results :-
     calkowita_wartosc_spadku(CalkowitaWartosc),
     format("Całkowita wartość spadku: ~w PLN~n", [CalkowitaWartosc]),
     

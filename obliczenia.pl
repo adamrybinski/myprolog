@@ -34,10 +34,16 @@ honorarium_pana_mecenasa(30000). % Tymczasowa wartość w PLN
 % Koszty sądowe
 koszty_sadowe(6000). % Tymczasowa wartość w PLN
 
+% Helper predicate to accumulate values from a list
+accumulate_list([], 0).
+accumulate_list([H|T], Sum) :-
+    accumulate_list(T, Rest),
+    Sum is H + Rest.
+
 % Suma już przydzielonych nieruchomości dla osoby
 suma_darowizn(Osoba, SumaDarowiznOsoby) :-
     findall(Darowizna, darowizna(Osoba, _, Darowizna), WszystkieDarowizny),
-    sum_list(WszystkieDarowizny, SumaDarowiznOsoby).
+    accumulate_list(WszystkieDarowizny, SumaDarowiznOsoby).
 
 % Całkowita wartość spadku
 calkowita_wartosc_spadku(CalkowitaWartosc) :-
@@ -73,7 +79,7 @@ koszt_prawny_na_osobe(KosztNaOsobe) :-
 % Suma kosztów pokrytych przez osobę
 suma_kosztow_pokrytych(Osoba, KosztyPokrytePrzezOsobe) :-
     findall(Kwota, koszt_pokryty(Osoba, _, Kwota), ListaPokrytych),
-    sum_list(ListaPokrytych, KosztyPokrytePrzezOsobe).
+    accumulate_list(ListaPokrytych, KosztyPokrytePrzezOsobe).
 
 % Dostosowany udział spadkobiercy
 udzial_dostosowany(Osoba, UdzialDostosowany) :-
@@ -88,22 +94,30 @@ udzial_dostosowany(Osoba, UdzialDostosowany) :-
                     %  - KosztPrawnyNaOsobe
                     %  + KosztyPokrytePrzezOsobe.
 
-% Predefiniowane zapytania
+% Main predicate
+main(_) :-
+    print_results,
+    halt.
 
-:- calkowita_wartosc_spadku(CalkowitaWartosc),
-   format("Całkowita wartość spadku: ~:d PLN~n", [CalkowitaWartosc]),
+print_results :-
+    calkowita_wartosc_spadku(CalkowitaWartosc),
+    format("Całkowita wartość spadku: ~w PLN~n", [CalkowitaWartosc]),
+    
+    udzial_dostosowany(adam, UdzialAdama),
+    format("Udział Adama: ~w PLN~n", [UdzialAdama]),
+    
+    udzial_dostosowany(paulina, UdzialPauliny),
+    format("Udział Pauliny: ~w PLN~n", [UdzialPauliny]),
+    
+    udzial_dostosowany(wojtek, UdzialWojtka),
+    format("Udział Wojtka: ~w PLN~n", [UdzialWojtka]),
+    
+    udzial_dostosowany(alicja, UdzialAlicji),
+    format("Udział Alicji: ~w PLN~n", [UdzialAlicji]),
+    
+    udzial_dostosowany(janusz, UdzialJanusza),
+    format("Udział Janusza: ~w PLN~n", [UdzialJanusza]).
 
-   udzial_dostosowany(adam, UdzialAdama),
-   format("Udział Adama: ~:d PLN~n", [UdzialAdama]),
 
-   udzial_dostosowany(paulina, UdzialPauliny),
-   format("Udział Pauliny: ~:d PLN~n", [UdzialPauliny]),
-
-   udzial_dostosowany(wojtek, UdzialWojtka),
-   format("Udział Wojtka: ~:d PLN~n", [UdzialWojtka]),
-
-   udzial_dostosowany(alicja, UdzialAlicji),
-   format("Udział Alicji: ~:d PLN~n", [UdzialAlicji]),
-
-   udzial_dostosowany(janusz, UdzialJanusza),
-   format("Udział Janusza: ~:d PLN~n", [UdzialJanusza]).
+% Entry point
+:- initialization(main(_)).

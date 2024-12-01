@@ -1,39 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book Recommendations</title>
-    <script>
-      function getRecommendations(genre) {
-        fetch(`/recommend?genre=${genre}`)
-          .then((response) => response.json())
-          .then((data) => {
-            const recommendations = data.recommendations;
-            const resultDiv = document.getElementById("results");
-            resultDiv.innerHTML = ""; // Clear previous results
-            if (recommendations?.length > 0) {
-              recommendations.forEach((book) => {
-                const p = document.createElement("p");
-                p.textContent = `${book.title} by ${book.author}`;
-                resultDiv.appendChild(p);
-              });
-            } else {
-              resultDiv.textContent = "No recommendations found.";
-            }
-          })
-          .catch((error) => console.error("Error:", error));
-      }
-    </script>
-  </head>
-  <body>
-    <h1>Book Recommendations</h1>
-    <h2>Select a Genre:</h2>
-    <button onclick="getRecommendations('sci_fi')">Science Fiction</button>
-    <button onclick="getRecommendations('fantasy')">Fantasy</button>
-    <button onclick="getRecommendations('mystery')">Mystery</button>
-
-    <h2>Recommendations:</h2>
-    <div id="results"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello, world!</title>
+</head>
+<body>
+    <h1>Hello, world!</h1>
+</body>
 </html>

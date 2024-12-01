@@ -58,4 +58,4 @@ recommend_books(Request) :-
 
 
 % Entry point to start the server on port 3000
-:- initialization(start_server(3000)).
+:- initialization(start_server(9090)).
